@@ -1,0 +1,333 @@
+/* =========================
+   全体
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans JP",
+        sans-serif;
+
+    background: #f4f7fb;
+    color: #263238;
+}
+
+
+/* =========================
+   メインフォーム
+   action="/add" を利用
+========================= */
+
+form[action="/add"] {
+    display: flex;
+    gap: 10px;
+
+    width: min(900px, 92%);
+    margin: 40px auto 30px;
+
+    padding: 20px;
+
+    background: white;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* 「Hello Todo!」のh1 */
+
+form[action="/add"] h1 {
+    position: absolute;
+
+    top: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    margin: 0;
+
+    font-size: 32px;
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+
+/* Todo入力欄 */
+
+form[action="/add"] input[name="todo"],
+form[action="/add"] input[name="minutes"] {
+    padding: 12px 14px;
+
+    border: 1px solid #d9e0e8;
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    background: white;
+}
+
+form[action="/add"] input[name="todo"] {
+    flex: 1;
+}
+
+form[action="/add"] input[name="minutes"] {
+    width: 180px;
+}
+
+form[action="/add"] input:focus {
+    border-color: #536dfe;
+}
+
+
+/* Todo追加ボタン */
+
+form[action="/add"] button {
+    padding: 12px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #536dfe;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+form[action="/add"] button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   見出し
+========================= */
+
+h2 {
+    width: min(900px, 92%);
+    margin: 30px auto 15px;
+
+    font-size: 22px;
+}
+
+
+/* =========================
+   Todo一覧
+   pタグをカードとして利用
+========================= */
+
+h2 + p,
+h2 ~ p {
+    width: min(900px, 92%);
+}
+
+
+/* Todoの各p */
+
+p {
+    line-height: 1.7;
+}
+
+
+/* =========================
+   Todoのリンク
+========================= */
+
+a {
+    display: inline-block;
+
+    margin-left: 8px;
+    padding: 5px 10px;
+
+    border-radius: 7px;
+
+    background: #eef2ff;
+    color: #536dfe;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+a:hover {
+    background: #dfe5ff;
+}
+
+
+/* 削除リンク */
+
+a[href^="/delete"] {
+    background: #ffebee;
+    color: #e53935;
+}
+
+a[href^="/delete"]:hover {
+    background: #ffcdd2;
+}
+
+
+/* 完了・未完了リンク */
+
+a[href^="/complete"],
+a[href^="/uncomplete"] {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+
+/* =========================
+   AIスケジュール
+========================= */
+
+/*
+   /schedule のフォームをAIボタンとして扱う
+*/
+
+form[action="/schedule"] {
+    width: min(900px, 92%);
+    margin: 20px auto 40px;
+
+    padding: 25px;
+
+    background: white;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* AIスケジュールの見出し */
+
+form[action="/schedule"] h2 {
+    width: auto;
+    margin: 0 0 15px;
+}
+
+
+/* AIの回答 */
+
+form[action="/schedule"] p {
+    padding: 18px;
+
+    background: #f8f9ff;
+
+    border-radius: 10px;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+}
+
+
+/* AIボタン */
+
+form[action="/schedule"] button {
+    width: 100%;
+
+    margin-top: 15px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #536dfe;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+form[action="/schedule"] button:hover {
+    background: #4055d6;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   スマホ対応
+========================= */
+
+@media (max-width: 650px) {
+
+    form[action="/add"] {
+        flex-direction: column;
+    }
+
+    form[action="/add"] input[name="minutes"] {
+        width: 100%;
+    }
+
+    form[action="/add"] button {
+        width: 100%;
+    }
+
+    form[action="/schedule"] {
+        width: 94%;
+    }
+
+    h2 {
+        width: 94%;
+    }
+
+    a {
+        margin-top: 5px;
+    }
+}
+
+form[action="/adjust_schedule"] textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 16px;
+    margin-bottom: 12px;
+
+    border: 1px solid #d9dce5;
+    border-radius: 10px;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    resize: vertical;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+form[action="/adjust_schedule"] textarea:focus {
+    outline: none;
+    border-color: #4f7cff;
+    box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.12);
+}
+
+form[action="/adjust_schedule"] button {
+    width: 100%;
+    padding: 12px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #4f7cff;
+    color: white;
+
+    font-size: 16px;
+    cursor: pointer;
+}

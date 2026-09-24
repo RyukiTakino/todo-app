@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form action="/add">
+        <h1>Hello Todo!</h1>
+        <input type="text" id="todo" name="todo" placeholder="Todoを入力">
+        <input type="number" id="minutes" name="minutes" placeholder="必要時間（分）">
+        <button>todo追加</button>
+    </form>
+    <h2>Todo一覧</h2>
+    {% for todo in todolist %}
+        {% if todo["completed"] %}
+            <p>
+                {{ todo["title"] }} (完了)
+                {{ todo["minutes"]}}分
+                <a href="/delete/{{ todo['id'] }}">削除</a>
+                <a href="/uncomplete/{{ todo['id'] }}">未完了</a>
+            </p>
+        {% else %}
+            <p>
+                {{todo["title"]}} (未完了)
+                {{ todo["minutes"]}}分
+                <a href="/delete/{{ todo['id'] }}">削除</a>
+                <a href="/complete/{{ todo['id'] }}">完了</a>
+            </p>
+        {% endif %}
+    {% endfor %}
+    <h2>AIスケジュール</h2>
+
+    <p style="white-space: pre-line;">{{ schedule }}</p>
+
+    <form action="/schedule">
+        <button>スケジュール作成</button>
+    </form>
+    <form action="/adjust_schedule">
+    <textarea
+        name="instruction"
+        placeholder="例：12時〜13時は昼休みにして&#10;もっと余裕を持ったスケジュールにして"
+    ></textarea>
+
+    <button>スケジュールを調整</button>
+</form>
+</body>
+</html>
