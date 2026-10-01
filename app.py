@@ -11,7 +11,7 @@ connection.execute("""
 CREATE TABLE IF NOT EXISTS todos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
-    completed INTEGER
+    completed INTEGER,
     minutes INTEGER
 )
 """)
@@ -32,12 +32,16 @@ def get_db():
 def add_minutes_column():
     connection = sqlite3.connect("todo.db")
 
-    connection.execute(
-        "ALTER TABLE todos ADD COLUMN minutes INTEGER"
-    )
-
-    connection.commit()
+    try:
+        connection.execute(
+            "ALTER TABLE todos ADD COLUMN minutes INTEGER"
+        )
+        connection.commit()
+    except sqlite3.OperationalError:
+        pass
     connection.close()
+
+add_minutes_column()
 
 @app.route("/hello")
 def hello():    
